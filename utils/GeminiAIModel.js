@@ -1,17 +1,22 @@
 const {GoogleGenerativeAI} = require("@google/generative-ai");
-  
+import { generationConfigInterviewQuestionsJSON } from "./geminiGenerationConfig";
+
+
+// Gemini Initialization:
 const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+
+
+// Model Version Constant
+const model_version = process.env.NEXT_PUBLIC_GEMINI_VERSION;
+
+
+// Models
+// Default Text Generation Model
+const model = genAI.getGenerativeModel({ model: model_version});
   
-const generationConfig = {
-    temperature: 1,
-    topP: 0.95,
-    topK: 40,
-    maxOutputTokens: 8192,
-    responseMimeType: "text/plain",
-};
+// Interview Questions Generation Model
+const interviewQuestionGenerativeModel = genAI.getGenerativeModel({model:model_version,generationConfig:generationConfigInterviewQuestionsJSON})
   
-const chatSession = model.startChat({generationConfig});
   
 
-export {model,chatSession};
+export {model,interviewQuestionGenerativeModel};
