@@ -31,3 +31,23 @@ export const interviewQuestionsPromptSchema = {
       required: ["questionText", "category", "difficulty"],
     },
   };
+
+
+  export const feedbackOutputSchema = {
+    description: "Schema for AI-generated feedback and rating for a user's interview answer",
+    type: SchemaType.OBJECT,
+    properties: {
+      rating: {
+        type: SchemaType.NUMBER,
+        description: "The AI's rating for the user's answer, from 1 to 10",
+        nullable: false,
+      },
+      feedback: {
+        type: SchemaType.STRING,
+        description: "Detailed feedback on the user's answer, including strengths and areas for improvement",
+        nullable: false,
+      },
+    },
+    required: ["rating", "feedback"],
+  };
+  

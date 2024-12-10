@@ -1,4 +1,4 @@
-import { interviewQuestionsPromptSchema } from "./geminiPromptSchema";
+import { interviewQuestionsPromptSchema, feedbackOutputSchema } from "./geminiPromptSchema";
 
 export const defaultTextGenerationConfig = {
     temperature: 1,
@@ -12,3 +12,9 @@ export const generationConfigInterviewQuestionsJSON = {
     responseMimeType: "application/json",
     responseSchema: interviewQuestionsPromptSchema,
   }
+
+
+export const generationConfigInterviewFeedbackJSON = {
+    responseMimeType: "application/json",
+    responseSchema: feedbackOutputSchema,
+}

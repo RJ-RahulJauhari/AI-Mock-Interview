@@ -7,6 +7,7 @@ import {
   SignedOut,
   UserButton
 } from '@clerk/nextjs'
+import { Toaster } from "@/components/ui/sonner";
 
 const poppinsBlack = localFont({
   src: "./fonts/Poppins-Black.ttf",
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body
         className={`${poppinsBlack.variable} ${poppinsItallic.variable} antialiased`}>
+          <Toaster></Toaster>
         {children}
       </body>
     </html>

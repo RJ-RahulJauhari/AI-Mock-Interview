@@ -1,5 +1,6 @@
 const {GoogleGenerativeAI} = require("@google/generative-ai");
-import { generationConfigInterviewQuestionsJSON } from "./geminiGenerationConfig";
+import { generationConfigInterviewFeedbackJSON, generationConfigInterviewQuestionsJSON } from "./geminiGenerationConfig";
+import { feedbackOutputSchema } from "./geminiPromptSchema";
 
 
 // Gemini Initialization:
@@ -16,7 +17,7 @@ const model = genAI.getGenerativeModel({ model: model_version});
   
 // Interview Questions Generation Model
 const interviewQuestionGenerativeModel = genAI.getGenerativeModel({model:model_version,generationConfig:generationConfigInterviewQuestionsJSON})
-  
+const feedbackModel = genAI.getGenerativeModel({model:model_version, generationConfig:generationConfigInterviewFeedbackJSON})
   
 
-export {model,interviewQuestionGenerativeModel};
+export {model,interviewQuestionGenerativeModel,feedbackModel};

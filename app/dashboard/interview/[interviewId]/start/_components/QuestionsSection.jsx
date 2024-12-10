@@ -1,11 +1,19 @@
 "use client"
-import { Lightbulb } from "lucide-react";
+import { Lightbulb, Volume2 } from "lucide-react";
 import { useState } from "react";
 
+const QuestionsSection = ({ mockInterviewQuestion, activeQuestionIndex, setActiveQuestionIndex }) => {
 
-const QuestionsSection = ({ mockInterviewQuestion }) => {
 
-  const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
+  const textToSpeech = (text) => {
+    if('speechSynthesis' in window){
+      const speech = new SpeechSynthesisUtterance(text);
+      window.speechSynthesis.speak(speech);
+    }else{
+      alert("Sorry your browser does not suport text to speech....")
+    }
+
+  }
 
 
   return (
@@ -13,7 +21,7 @@ const QuestionsSection = ({ mockInterviewQuestion }) => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
         {mockInterviewQuestion && mockInterviewQuestion.length > 0 ? (
           mockInterviewQuestion.map((question, index) => (
-            <h2 key={index} className={`p-2 border rounded-full text-xs md:text-sm text-center cursor-pointer ${activeQuestionIndex == index && 'bg-primary text-white'}`}>
+            <h2 onClick={() => {setActiveQuestionIndex(index)}} key={index} className={`p-2 border rounded-full text-xs md:text-sm text-center cursor-pointer ${activeQuestionIndex == index && 'bg-primary text-white'}`}>
               Question {index + 1}:
             </h2>
           ))
@@ -22,7 +30,7 @@ const QuestionsSection = ({ mockInterviewQuestion }) => {
         )}
       </div>
       <h2 className="text-lg my-5">{mockInterviewQuestion[activeQuestionIndex]?.questionText}</h2>
-
+      <Volume2 className="m-2" onClick={() => textToSpeech(mockInterviewQuestion[activeQuestionIndex]?.questionText)}></Volume2>
       <div className=" p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         {/* Lightbulb Icon */}
         <Lightbulb className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" />
