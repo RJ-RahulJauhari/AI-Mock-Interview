@@ -112,7 +112,7 @@ const AddNewInterview = () => {
   
       // Safely access sendToDatabaseAndReturnInterviewID
       if (sendToDatabaseAndReturnInterviewID && sendToDatabaseAndReturnInterviewID[0]?.mockId) {
-        await router.push(`/dashboard/interview/${sendToDatabaseAndReturnInterviewID[0]?.mockId}`);
+        await router.push(`/ai-mock-interview/interview/${sendToDatabaseAndReturnInterviewID[0]?.mockId}`);
       } else {
         console.error("Failed to navigate: No valid mock ID returned.");
       }

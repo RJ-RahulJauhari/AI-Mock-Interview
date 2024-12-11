@@ -36,7 +36,7 @@ const InterviewItemCard = ({ interview }) => {
       <CardFooter className="flex justify-between gap-2">
         <Button
           className="w-full"
-          onClick={() => router.push(`/dashboard/interview/${interview?.mockId}/feedback`)}
+          onClick={() => router.push(`/ai-mock-interview/interview/${interview?.mockId}/feedback`)}
           variant="outline"
           aria-label="Provide Feedback"
           title="Provide Feedback"
@@ -45,7 +45,7 @@ const InterviewItemCard = ({ interview }) => {
         </Button>
         <Button
           className="w-full"
-          onClick={() => router.push(`/dashboard/interview/${interview?.mockId}`)}
+          onClick={() => router.push(`/ai-mock-interview/interview/${interview?.mockId}`)}
           variant="outline"
           aria-label="Start Interview"
           title="Start Interview"

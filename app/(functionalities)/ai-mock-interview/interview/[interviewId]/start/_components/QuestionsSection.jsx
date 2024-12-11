@@ -1,6 +1,5 @@
 "use client"
 import { Lightbulb, Volume2 } from "lucide-react";
-import { useState } from "react";
 
 const QuestionsSection = ({ mockInterviewQuestion, activeQuestionIndex, setActiveQuestionIndex }) => {
 

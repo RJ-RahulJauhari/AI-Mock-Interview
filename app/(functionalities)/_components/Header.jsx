@@ -36,13 +36,13 @@ const Header = () => {
         className={`${isMenuOpen ? "block" : "hidden"} 
           absolute top-16 left-0 w-full bg-white md:static md:flex md:gap-8 md:w-auto md:bg-transparent border-none shadow-none`}
       >
-        <Link href={"/dashboard"}>
+        <Link href={"/ai-mock-interview"}>
           <li
             className={`text-xl p-4 hover:text-primary hover:scale-105 transition-all cursor-pointer ${
-              path == "/dashboard" && "text-primary font-bold"
+              path == "/ai-mock-interview" && "text-primary font-bold"
             }`}
           >
-            Dashboard
+            AI Mock Interview
           </li>
         </Link>
         <Link href={"/upgrade"}>
@@ -52,15 +52,6 @@ const Header = () => {
             }`}
           >
             Upgrade
-          </li>
-        </Link>
-        <Link href={"/how-it-works"}>
-          <li
-            className={`text-xl p-4 hover:text-primary transition-all cursor-pointer ${
-              path == "/how-it-works" && "text-primary font-bold"
-            }`}
-          >
-            How it works?
           </li>
         </Link>
       </ul>

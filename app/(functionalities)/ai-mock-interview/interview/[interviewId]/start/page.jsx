@@ -87,7 +87,7 @@ const StartInterview = ({ params }) => {
         </Button>
 
         {activeQuestionIndex === mockResponse?.length - 1 ? (
-          <Link href={"/dashboard/interview/"+interviewData?.mockId+"/feedback"}>
+          <Link href={"/ai-mock-interview/interview/"+interviewData?.mockId+"/feedback"}>
             <Button
               className="font-semibold"
               variant="danger"

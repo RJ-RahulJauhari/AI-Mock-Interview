@@ -95,7 +95,7 @@ const InterviewPage = ({ params }) => {
             </>
           )}
           <Button
-            onClick = {() => router.push('/dashboard/interview/'+params.interviewId+'/start')}
+            onClick = {() => router.push('/ai-mock-interview/interview/'+params.interviewId+'/start')}
             className="w-full mt-5 bg-primary text-white font-semibold hover:bg-primary-dark transition"
           >
             Start Interview
