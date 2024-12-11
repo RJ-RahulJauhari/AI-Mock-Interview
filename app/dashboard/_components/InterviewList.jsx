@@ -37,13 +37,13 @@ const InterviewList = () => {
   }, [user]);
 
   return (
-    <div className="justify-start">
+    <div>
       {loading ? (
         <p className="text-center text-gray-500">Loading interviews...</p>
       ) : interviewList.length === 0 ? (
         <p className="text-center text-gray-500">No interviews found.</p>
       ) : (
-        <div className="flex flex-row flex-wrap gap-2 items-start justify-start w-full ">
+        <div className="grid grid-flow-row grid-cols-3">
           {interviewList.map((interview) => (
             <InterviewItemCard key={interview.id} interview={interview} />
           ))}

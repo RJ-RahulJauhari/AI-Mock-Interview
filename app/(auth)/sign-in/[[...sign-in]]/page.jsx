@@ -30,8 +30,7 @@ export default function Page() {
 
             {/* Subtitle */}
             <p className="mt-4 text-lg text-gray-600">
-              Build skills in AI, machine learning, and data science. Get access to
-              interactive courses, real-world projects, and expert guidance.
+              Build skills with the help of Generative AI. Generate your own courses, take smart interviews and study with LLM's.
             </p>
 
             {/* Sign-In Button */}
