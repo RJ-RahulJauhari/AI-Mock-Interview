@@ -19,7 +19,7 @@ const InterviewList = () => {
         .from(MockInterview)
         .where(eq(MockInterview.createdBy, user?.primaryEmailAddress?.emailAddress))
         .orderBy(desc(MockInterview.id));
-        
+
       if (result) {
         setInterviewList(result);
       }
@@ -37,13 +37,13 @@ const InterviewList = () => {
   }, [user]);
 
   return (
-    <div className="w-full">
+    <div className="justify-start">
       {loading ? (
         <p className="text-center text-gray-500">Loading interviews...</p>
       ) : interviewList.length === 0 ? (
         <p className="text-center text-gray-500">No interviews found.</p>
       ) : (
-        <div className="flex flex-row flex-wrap gap-2">
+        <div className="flex flex-row flex-wrap gap-2 items-start justify-start w-full ">
           {interviewList.map((interview) => (
             <InterviewItemCard key={interview.id} interview={interview} />
           ))}
