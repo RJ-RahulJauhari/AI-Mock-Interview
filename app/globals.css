@@ -85,4 +85,26 @@ body {
 
   }
 
+  .scale-up-onhover{
+    @apply hover: scale-105
+  }
+  .moving-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, #3b82f6, #a855f7, #ec4899);
+    background-size: 300%; /* Extend gradient for animation */
+    animation: gradient-shift 5s infinite; /* Animation duration and repetition */
+  }
+  
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%; /* Start position of gradient */
+    }
+    50% {
+      background-position: 100% 50%; /* Midpoint of animation */
+    }
+    100% {
+      background-position: 0% 50%; /* End position to loop */
+    }
+  }
+
 }

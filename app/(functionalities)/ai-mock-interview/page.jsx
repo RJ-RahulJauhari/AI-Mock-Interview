@@ -1,9 +1,11 @@
+import Meteors from "@/components/ui/meteors";
 import AddNewInterview from "./_components/AddNewInterview";
 import InterviewList from "./_components/InterviewList";
 
 const DashboardPage = () => {
   return (
     <div className="p-10">
+
       {/* Dashboard Header */}
       <header>
         <h2 className="font-bold text-4xl">Dashboard</h2>

@@ -10,6 +10,8 @@ import RecordAnswerSection from "./_components/RecordAnswerSection";
 import { Button } from "@/components/ui/button"; // Import the Button component
 import Link from "next/link";
 import { FcPrevious, FcNext } from "react-icons/fc";
+import Confetti from "@/components/ui/confetti";
+import { ConfettiButton } from "@/components/ui/confetti";
 
 
 const StartInterview = ({ params }) => {
@@ -91,6 +93,7 @@ const StartInterview = ({ params }) => {
 
         {activeQuestionIndex === interviewData?.length - 1 ? (
           <Link href={"/ai-mock-interview/interview/"+interviewId+"/feedback"}>
+            <ConfettiButton variant={"destructive"}>
             <Button
               className="font-semibold"
               variant="destructive"
@@ -98,6 +101,7 @@ const StartInterview = ({ params }) => {
             >
               End Interview
             </Button>
+            </ConfettiButton>
           </Link>
         ) : (
           <Button
