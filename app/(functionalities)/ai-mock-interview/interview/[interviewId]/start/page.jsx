@@ -9,13 +9,16 @@ import QuestionsSection from "./_components/QuestionsSection";
 import RecordAnswerSection from "./_components/RecordAnswerSection";
 import { Button } from "@/components/ui/button"; // Import the Button component
 import Link from "next/link";
+import { FcPrevious, FcNext } from "react-icons/fc";
+
 
 const StartInterview = ({ params }) => {
 
   const [interviewData, setInterviewData] = useState();
   const interviewId = React.use(params).interviewId;
-  const [mockResponse, setMockResponse] = useState();
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
+  const [QuestionStatusMap,setQuestionStatusMap] = useState(new Map());
+  
 
   useEffect(() => {
     getInterviewDetails();
@@ -27,19 +30,17 @@ const StartInterview = ({ params }) => {
       .from(MockInterview)
       .where(eq(MockInterview.mockId, interviewId));
     if (result) {
-      console.log(result[0]);
-      setInterviewData(result[0]);
-
-      const mres = JSON.parse(result[0].jsonMockResp);
-      console.log(mres);
-      setMockResponse(mres);
+      console.log("Interview Data: ",result[0]);
+      const pres = JSON.parse(result[0].jsonMockResp);
+      setInterviewData(pres);
+      console.log("Parsed Interview Data: ",pres);
     } else {
       console.log("Unable to fetch record of the interview..");
     }
   };
 
   const handleNextQuestion = () => {
-    if (activeQuestionIndex < mockResponse.length - 1) {
+    if (activeQuestionIndex < interviewData.length - 1) {
       setActiveQuestionIndex(activeQuestionIndex + 1);
     }
   };
@@ -52,7 +53,6 @@ const StartInterview = ({ params }) => {
 
   const handleEndInterview = () => {
     console.log("Interview Ended");
-    // Add any necessary cleanup or redirection logic here
   };
 
   return (
@@ -60,18 +60,20 @@ const StartInterview = ({ params }) => {
       {/* Left Section: Questions */}
       <div className="flex-1 w-full lg:w-1/2 p-4">
         <QuestionsSection
+          questionStatusUtility = {{QuestionStatusMap,setQuestionStatusMap}}
           activeQuestionIndex={activeQuestionIndex}
           setActiveQuestionIndex = {setActiveQuestionIndex}
-          mockInterviewQuestion={mockResponse ? mockResponse : ""}
+          mockInterviewQuestion={interviewData ? interviewData : ""}
         />
       </div>
 
       {/* Right Section: Record Answer */}
       <div className="flex-1 w-full lg:w-1/2 p-4">
         <RecordAnswerSection
+          questionStatusUtility = {{QuestionStatusMap,setQuestionStatusMap}}
           interviewData={interviewData}
+          interviewId={interviewId}
           activeQuestionIndex={activeQuestionIndex}
-          mockInterviewQuestion={mockResponse ? mockResponse : ""}
         />
       </div>
 
@@ -83,14 +85,15 @@ const StartInterview = ({ params }) => {
           onClick={handlePreviousQuestion}
           disabled={activeQuestionIndex === 0} // Disable if it's the first question
         >
+        <FcPrevious />
           Previous Question
         </Button>
 
-        {activeQuestionIndex === mockResponse?.length - 1 ? (
-          <Link href={"/ai-mock-interview/interview/"+interviewData?.mockId+"/feedback"}>
+        {activeQuestionIndex === interviewData?.length - 1 ? (
+          <Link href={"/ai-mock-interview/interview/"+interviewId+"/feedback"}>
             <Button
               className="font-semibold"
-              variant="danger"
+              variant="destructive"
               onClick={handleEndInterview}
             >
               End Interview
@@ -101,9 +104,10 @@ const StartInterview = ({ params }) => {
             className="font-semibold"
             variant="outline"
             onClick={handleNextQuestion}
-            disabled={activeQuestionIndex === mockResponse?.length - 1} // Disable if it's the last question
+            disabled={activeQuestionIndex === interviewData?.length - 1} // Disable if it's the last question
           >
             Next Question
+            <FcNext />
           </Button>
         )}
       </div>

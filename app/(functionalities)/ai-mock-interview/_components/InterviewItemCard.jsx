@@ -8,7 +8,7 @@ const InterviewItemCard = ({ interview }) => {
   const router = useRouter();
 
   return (
-    <Card className="w-full max-w-md min-w-sm mx-auto p-4 shadow-lg hover:scale-105 transition-all flex flex-col justify-between h-full">
+    <Card className="w-full min-w-sm mx-auto p-4 shadow-lg hover:scale-105 transition-all flex flex-col justify-between h-full">
       {/* Header Section */}
       <CardHeader>
         <CardTitle>
@@ -33,7 +33,7 @@ const InterviewItemCard = ({ interview }) => {
       </CardContent>
 
       {/* Footer Section */}
-      <CardFooter className="flex justify-between gap-2">
+      <CardFooter className="flex justify-between gap-2 flex-wrap">
         <Button
           className="w-full"
           onClick={() => router.push(`/ai-mock-interview/interview/${interview?.mockId}/feedback`)}

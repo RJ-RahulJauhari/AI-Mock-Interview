@@ -17,9 +17,11 @@ const Header = () => {
   return (
     <div className="flex p-4 items-center justify-between shadow-sm">
       {/* Logo */}
-      <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-        AI Learning Platform
-      </h1>
+      <Link href={'/'}>
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          AI Learning Platform
+        </h1>
+      </Link>
 
       {/* Hamburger Button for Smaller Screens */}
       <div className="md:hidden">
@@ -38,27 +40,24 @@ const Header = () => {
       >
         <Link href={"/ai-mock-interview"}>
           <li
-            className={`text-xl p-4 hover:text-primary hover:scale-105 transition-all cursor-pointer ${
-              path == "/ai-mock-interview" && "text-primary font-bold"
-            }`}
+            className={`text-xl p-4 hover:text-primary hover:scale-105 transition-all cursor-pointer ${path == "/ai-mock-interview" && "text-primary font-bold"
+              }`}
           >
             AI Mock Interview
           </li>
         </Link>
         <Link href={"/chat-with-pdf"}>
           <li
-            className={`text-xl p-4 hover:text-primary hover:scale-105 transition-all cursor-pointer ${
-              path == "/chat-with-pdf" && "text-primary font-bold"
-            }`}
+            className={`text-xl p-4 hover:text-primary hover:scale-105 transition-all cursor-pointer ${path == "/chat-with-pdf" && "text-primary font-bold"
+              }`}
           >
             Study AI
           </li>
         </Link>
         <Link href={"/upgrade"}>
           <li
-            className={`text-xl p-4 hover:text-primary transition-all cursor-pointer ${
-              path == "/upgrade" && "text-primary font-bold"
-            }`}
+            className={`text-xl p-4 hover:text-primary transition-all cursor-pointer ${path == "/upgrade" && "text-primary font-bold"
+              }`}
           >
             Upgrade
           </li>

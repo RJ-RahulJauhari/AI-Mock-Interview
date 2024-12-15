@@ -4,7 +4,7 @@ import Header from '../_components/Header'
 const DashboardLayout = ({children}) => {
   return (
     <div>
-        <div className='mx-5 md:mx-20 lg:mx-36'>
+        <div className='mx-5 sm: mx-1'>
           {children}
         </div>
     </div>

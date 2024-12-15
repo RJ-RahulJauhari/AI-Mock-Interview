@@ -1,18 +1,20 @@
 "use client"
 import { Lightbulb, Volume2 } from "lucide-react";
 
-const QuestionsSection = ({ mockInterviewQuestion, activeQuestionIndex, setActiveQuestionIndex }) => {
+const QuestionsSection = ({ mockInterviewQuestion, activeQuestionIndex, setActiveQuestionIndex, questionStatusUtility }) => {
 
 
   const textToSpeech = (text) => {
-    if('speechSynthesis' in window){
+    if ('speechSynthesis' in window) {
       const speech = new SpeechSynthesisUtterance(text);
       window.speechSynthesis.speak(speech);
-    }else{
-      alert("Sorry your browser does not suport text to speech....")
+    } else {
+      alert("Sorry your browser does not support text to speech....")
     }
 
   }
+
+  const { QuestionStatusMap, setQuestionStatusMap } = questionStatusUtility;
 
 
   return (
@@ -20,8 +22,17 @@ const QuestionsSection = ({ mockInterviewQuestion, activeQuestionIndex, setActiv
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
         {mockInterviewQuestion && mockInterviewQuestion.length > 0 ? (
           mockInterviewQuestion.map((question, index) => (
-            <h2 onClick={() => {setActiveQuestionIndex(index)}} key={index} className={`p-2 border rounded-full text-xs md:text-sm text-center cursor-pointer ${activeQuestionIndex == index && 'bg-primary text-white'}`}>
-              Question {index + 1}:
+            <h2
+              onClick={() => setActiveQuestionIndex(index)}
+              key={index}
+              className={`p-2 border rounded-full text-xs md:text-sm text-center cursor-pointer ${activeQuestionIndex === index
+                  ? QuestionStatusMap.get(activeQuestionIndex)
+                    ? "bg-green-500 text-white"
+                    : "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+                  : ""
+                }`}
+            >
+              Question {index + 1}
             </h2>
           ))
         ) : (

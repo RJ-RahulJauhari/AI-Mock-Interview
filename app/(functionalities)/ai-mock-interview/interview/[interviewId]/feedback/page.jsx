@@ -1,7 +1,7 @@
 "use client"
 import db from '@/utils/db'
 import { UserAnswerInterview } from '@/utils/schema'
-import { eq } from 'drizzle-orm'
+import { desc, eq } from 'drizzle-orm'
 import React, { useEffect, useState } from 'react'
 import {
     Accordion,
@@ -27,7 +27,7 @@ const FeedbackPage = ({ params }) => {
         const results = await db.select()
             .from(UserAnswerInterview)
             .where(eq(UserAnswerInterview.mockIdRef, interviewId))
-            .orderBy(UserAnswerInterview.id);
+            .orderBy(desc(UserAnswerInterview.id));
         if (results) {
             setFeedback(results);
             console.log(results);
