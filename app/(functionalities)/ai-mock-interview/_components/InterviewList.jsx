@@ -43,7 +43,7 @@ const InterviewList = () => {
       ) : interviewList.length === 0 ? (
         <p className="text-center text-gray-500">No interviews found.</p>
       ) : (
-        <div className="grid grid-flow-row grid-cols-3">
+        <div className="grid grid-flow-row sm: grid-cols-1 md: grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
           {interviewList.map((interview) => (
             <InterviewItemCard key={interview.id} interview={interview} />
           ))}

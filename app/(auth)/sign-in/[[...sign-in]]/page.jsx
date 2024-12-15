@@ -34,7 +34,7 @@ export default function Page() {
             </p>
 
             {/* Sign-In Button */}
-            <div className="mt-8">
+            <div className="flex justify-center items-center mt-8 ">
               <SignIn />
             </div>
           </div>

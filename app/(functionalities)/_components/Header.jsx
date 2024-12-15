@@ -45,6 +45,15 @@ const Header = () => {
             AI Mock Interview
           </li>
         </Link>
+        <Link href={"/chat-with-pdf"}>
+          <li
+            className={`text-xl p-4 hover:text-primary hover:scale-105 transition-all cursor-pointer ${
+              path == "/chat-with-pdf" && "text-primary font-bold"
+            }`}
+          >
+            Study AI
+          </li>
+        </Link>
         <Link href={"/upgrade"}>
           <li
             className={`text-xl p-4 hover:text-primary transition-all cursor-pointer ${

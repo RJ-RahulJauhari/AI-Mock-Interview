@@ -1,6 +1,9 @@
-import { varchar, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { varchar, serial, text, timestamp, integer, pgEnum } from "drizzle-orm/pg-core";
 import { pgTable } from "drizzle-orm/pg-core"
 import { FileKey } from "lucide-react";
+
+export const userSystemEnum = pgEnum("user_system_enum", ['system','user']);
+
 
 export const MockInterview = pgTable(
     "MockInterview",
@@ -40,5 +43,16 @@ export const Chats = pgTable(
         createdAt: timestamp('created_at').notNull().defaultNow(),
         userId: varchar("user_id", {length:256}).notNull(),
         fileKey: text('file_key').notNull()
+    }
+)
+
+export const Messages = pgTable(
+    "messages",
+    {
+        id: serial("id").primaryKey(),
+        chatId: integer("chat_id").references(() => Chats.id).notNull(),
+        content: text('content').notNull(),
+        createdAt: timestamp('created_at').notNull().defaultNow(),
+        role: userSystemEnum('role').notNull()        
     }
 )
