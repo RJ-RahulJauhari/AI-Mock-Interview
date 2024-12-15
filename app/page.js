@@ -63,7 +63,7 @@ export default function Home() {
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl text-center font-bold moving-gradient p-4">AI Learning Platform</h1>
         </BlurFade>
         <BlurFade delay={0.5}>
-          <h2 className="text-xs sm:text-xl md:text-2xl lg:text-3xl mt-3 text-center">Use AI to help yourself with learning and preparation!</h2>
+          <h2 className="font-semibold text-xs sm:text-xl md:text-2xl lg:text-3xl mt-3 text-center">Use AI to help yourself with learning and preparation!</h2>
         </BlurFade>
         <ShinyButton className="mt-5 font-semibold" onClick={handleScrollToGrid}>Let's get started!</ShinyButton>
       </div>

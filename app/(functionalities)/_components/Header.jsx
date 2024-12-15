@@ -15,10 +15,10 @@ const Header = () => {
   }, [path]);
 
   return (
-    <div className="flex p-4 items-center justify-between shadow-sm">
+    <div className="flex p-4 items-center justify-between shadow-md">
       {/* Logo */}
       <Link href={'/'}>
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
           AI Learning Platform
         </h1>
       </Link>
