@@ -1,4 +1,3 @@
-import Meteors from "@/components/ui/meteors";
 import AddNewInterview from "./_components/AddNewInterview";
 import InterviewList from "./_components/InterviewList";
 

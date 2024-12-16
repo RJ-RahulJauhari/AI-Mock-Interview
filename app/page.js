@@ -6,6 +6,7 @@ import DotPattern from "@/components/ui/dot-pattern";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import ShinyButton from "@/components/ui/shiny-button";
 import { RocketIcon, FileTextIcon, CalendarIcon, InputIcon } from "@radix-ui/react-icons";
+import Image from "next/image";
 
 export default function Home() {
   const features = [
@@ -56,30 +57,47 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 overflow-hidden relative w-full">
-      <Meteors />
-      <DotPattern width={20} height={20} cx={1} cy={1} cr={1} />
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <BlurFade delay={0.25}>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl text-center font-bold moving-gradient p-4">AI Learning Platform</h1>
-        </BlurFade>
-        <BlurFade delay={0.5}>
-          <h2 className="font-semibold text-xs sm:text-xl md:text-2xl lg:text-3xl mt-3 text-center">Use AI to help yourself with learning and preparation!</h2>
-        </BlurFade>
-        <ShinyButton className="mt-5 font-semibold" onClick={handleScrollToGrid}>Let's get started!</ShinyButton>
-      </div>
-
-      {/* Bento Grid Section */}
-      <div ref={bentoGridRef} className="my-16 w-full px-6">
-        {/* BlurFade with a dynamic key */}
-        <BlurFade key={blurKey} delay={0.35}>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold gradient p-4">Have a look...</h1>
-        </BlurFade>
-        <BentoGrid className="lg:grid-rows-3">
-          {features.map((feature) => (
-            <BentoCard key={feature.name} {...feature} />
-          ))}
-        </BentoGrid>
-      </div>
+    <Meteors />
+    <DotPattern width={20} height={20} cx={1} cy={1} cr={1} />
+    
+    {/* Icon image positioned behind the text */}
+      <Image
+        src="/icon.png"
+        width={500}
+        height={500}
+        className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-10"
+        alt="Background Icon"
+      />
+    
+    <div className="flex flex-col items-center justify-center min-h-screen relative z-10">
+      <BlurFade delay={0.25}>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl text-center font-bold moving-gradient p-4">
+          AI Learning Platform
+        </h1>
+      </BlurFade>
+      <BlurFade delay={0.5}>
+        <h2 className="font-semibold text-xs sm:text-xl md:text-2xl lg:text-3xl mt-3 text-center">
+          Use AI to help yourself with learning and preparation!
+        </h2>
+      </BlurFade>
+      <ShinyButton className="mt-5 font-semibold" onClick={handleScrollToGrid}>
+        Let's get started!
+      </ShinyButton>
     </div>
+    
+    {/* Bento Grid Section */}
+    <div ref={bentoGridRef} className="my-16 w-full px-6">
+      <BlurFade key={blurKey} delay={0.35}>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold gradient p-4">
+          Have a look...
+        </h1>
+      </BlurFade>
+      <BentoGrid className="lg:grid-rows-3">
+        {features.map((feature) => (
+          <BentoCard key={feature.name} {...feature} />
+        ))}
+      </BentoGrid>
+    </div>
+  </div>
   );
 }

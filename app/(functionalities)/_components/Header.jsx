@@ -5,7 +5,7 @@ import { MenuIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-
+import Image from "next/image";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const path = usePathname();
@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <div className="flex p-4 items-center justify-between shadow-md">
       {/* Logo */}
-      <Link href={'/'}>
+      <Link className="flex flex-row" href={'/'}>
         <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
           AI Learning Platform
         </h1>
