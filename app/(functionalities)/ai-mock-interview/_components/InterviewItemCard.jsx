@@ -8,7 +8,7 @@ const InterviewItemCard = ({ interview }) => {
   const router = useRouter();
 
   return (
-    <Card className="w-full min-w-sm mx-auto p-4 shadow-lg hover:scale-105 transition-all flex flex-col justify-between h-full">
+    <Card className="w-full min-w-sm mx-auto p-4 shadow-lg hover:scale-105 hover:bg-gray-50 transition-all flex flex-col justify-between h-full">
       {/* Header Section */}
       <CardHeader>
         <CardTitle>

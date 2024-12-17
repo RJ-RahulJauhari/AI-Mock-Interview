@@ -21,11 +21,13 @@ import { v4 as uuidv4 } from 'uuid';
 import { useUser } from "@clerk/nextjs";
 import moment from "moment/moment";
 import { useRouter } from "next/navigation";
+import { MyGPT } from "@/utils/MyGPTModel";
+import { interviewQuestionsPromptSchema_MyGPT } from "@/utils/MyGPTSchema";
 
 
 // Utility function for creating the AI prompt
 const createPrompt = (jobPosition, jobDesc, jobExperience, filesData) => `
-  Using the details below, please frame 10 questions on the technologies, projects, and requirements of the job. Make it like an interview question, also include puzzles and concepts related to the technologies mentioned in the candidate's resume:
+  Using the details below, please frame 10 questions on the technologies, projects, and requirements of the job. Make it like an interview question, also include puzzles and concepts related to the technologies mentioned in the candidate's resume also give a sample high quality answer to the question generated:
   1. Job Position: ${jobPosition}
   2. Job Description: ${jobDesc}
   3. Years of Experience: ${jobExperience}
@@ -52,12 +54,33 @@ const fetchExtractedPDFData = async (files) => {
   return JSON.stringify(data.strings);
 };
 
-// Utility function for generating AI response
-const sendPromptToAI = async (jobPosition, jobDesc, jobExperience, filesData) => {
+const sendPromptToAIGem = async (jobPosition, jobDesc, jobExperience, filesData) => {
   const inputPrompt = createPrompt(jobPosition, jobDesc, jobExperience, filesData);
   const result = await interviewQuestionGenerativeModel.generateContent(inputPrompt);
   const jsonResponse = await result.response.text();
   return jsonResponse;
+};
+
+const sendPromptToAI = async (jobPosition, jobDesc, jobExperience, filesData) => {
+  try {
+    const inputPrompt = createPrompt(jobPosition, jobDesc, jobExperience, filesData);
+    const MyGPTQuestionsGenerator = MyGPT.withStructuredOutput(interviewQuestionsPromptSchema_MyGPT);
+    
+    // Await the response directly
+    const questions = await MyGPTQuestionsGenerator.invoke(inputPrompt);
+    
+    if (questions && questions.questions) {
+      const res = JSON.stringify(questions.questions)
+      console.log("MyGPT Questions: ", res);
+      return res; // Return the array of questions
+    } else {
+      console.log("Unable to Generate Questions --- MyGPT");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error while generating questions: ", error);
+    return null;
+  }
 };
 
 const AddNewInterview = () => {

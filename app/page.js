@@ -1,5 +1,5 @@
 "use client"
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BlurFade from "@/components/ui/blur-fade";
 import Meteors from "@/components/ui/meteors";
 import DotPattern from "@/components/ui/dot-pattern";
@@ -7,8 +7,14 @@ import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import ShinyButton from "@/components/ui/shiny-button";
 import { RocketIcon, FileTextIcon, CalendarIcon, InputIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
+import { MyGPT } from "@/utils/MyGPTModel";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+
+  const user = useUser();
+
   const features = [
     {
       Icon: RocketIcon,
@@ -80,9 +86,20 @@ export default function Home() {
           Use AI to help yourself with learning and preparation!
         </h2>
       </BlurFade>
-      <ShinyButton className="mt-5 font-semibold" onClick={handleScrollToGrid}>
+
+      {
+        user.isSignedIn
+        ?<ShinyButton className="mt-5 font-semibold" onClick={handleScrollToGrid}>
         Let's get started!
       </ShinyButton>
+        :
+        <ShinyButton className="mt-5 font-semibold" onClick={() => {useRouter().push('/sign-in')}}>
+        Login to get started!
+      </ShinyButton>
+      }
+      {/* <ShinyButton className="mt-5 font-semibold" onClick={handleScrollToGrid}>
+        Let's get started!
+      </ShinyButton> */}
     </div>
     
     {/* Bento Grid Section */}

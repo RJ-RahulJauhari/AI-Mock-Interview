@@ -12,6 +12,8 @@ import { useUser } from "@clerk/nextjs";
 import moment from "moment/moment";
 import { CrossIcon, DeleteIcon } from "lucide-react";
 import { RxCross1 } from "react-icons/rx";
+import { feedbackOutputSchema_MyGPT } from "@/utils/MyGPTSchema";
+import { MyGPT } from "@/utils/MyGPTModel";
 
 const RecordAnswerSection = ({ activeQuestionIndex, interviewData, interviewId, questionStatusUtility }) => {
 
@@ -58,6 +60,27 @@ const RecordAnswerSection = ({ activeQuestionIndex, interviewData, interviewId, 
     console.log(`Set Question ${activeQuestionIndex+1} as 'Done'`,QuestionStatusMap);
   }
 
+  const getFeedbackFromMyGPT = async () => {
+    try{
+      const prompt = `Question: ${interviewData[activeQuestionIndex]?.questionText || "No question available"}, User Answer: ${userAnswer || "NO ANSWER"}. Depending on the question, give me a rating out of 10 and detailed feedback on how to improve the answer. Also be strict with the rating if the answer is not relvant to the question give a 0.`;
+      console.log("Getting the response from MyGPT for question", activeQuestionIndex + 1);
+  
+      // Generate content from the feedback model
+      const feedbackModel_MyGPT = MyGPT.withStructuredOutput(feedbackOutputSchema_MyGPT,{name:"Feedback"});
+      const feedback_response = await feedbackModel_MyGPT.invoke(prompt);
+      if (feedback_response) {
+        console.log("Feedback received:", feedback_response);
+        return feedback_response;
+      } else {
+        console.log("No feedback received...");
+        return null;
+      }
+    }catch(error){
+      console.log("Error getting feedback from MyGPT");
+      return null; // Return null if there’s an error
+    }
+  }
+
   const getFeedbackFromGemini = async () => {
     try {
       // Construct the prompt
@@ -65,6 +88,7 @@ const RecordAnswerSection = ({ activeQuestionIndex, interviewData, interviewId, 
       console.log("Getting the response from Gemini for question", activeQuestionIndex + 1);
   
       // Generate content from the feedback model
+      getFeedbackFromMyGPT();
       const response = (await feedbackModel.generateContent(prompt)).response;
       console.log(response);
       
@@ -123,7 +147,7 @@ const RecordAnswerSection = ({ activeQuestionIndex, interviewData, interviewId, 
         toast("Processing your answer...", { duration: 1500 });
     
         // Get feedback from Gemini AI
-        const feedback = await getFeedbackFromGemini();
+        const feedback = await getFeedbackFromMyGPT();
     
         if (feedback) {
           console.log("Feedback received:", feedback);

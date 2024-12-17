@@ -54,14 +54,14 @@ const Header = () => {
             Study AI
           </li>
         </Link>
-        <Link href={"/upgrade"}>
+        {/* <Link href={"/upgrade"}>
           <li
             className={`text-xl p-4 hover:text-primary transition-all cursor-pointer ${path == "/upgrade" && "text-primary font-bold"
               }`}
           >
             Upgrade
           </li>
-        </Link>
+        </Link> */}
       </ul>
 
       {/* User Button */}
