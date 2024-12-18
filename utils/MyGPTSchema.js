@@ -13,11 +13,11 @@ export const interviewQuestionsPromptSchema_MyGPT = z.object({
           .describe("A high quality answer to the question")
           .nullable(false),
         category: z
-          .string()
-          .describe("The category of the question (e.g., technical, behavioral, puzzle)")
+          .enum(["technical", "behavioral", "puzzle", "coding", "aptitude"])
+          .describe("The category of the questions (e.g., technical, behavioral, puzzle, coding, aptitude)")
           .nullable(false),
         difficulty: z
-          .string()
+          .enum(["easy", "medium", "hard"])
           .describe("The difficulty level of the question (e.g., easy, medium, hard)")
           .nullable(false),
       })
@@ -28,7 +28,7 @@ export const interviewQuestionsPromptSchema_MyGPT = z.object({
 export const feedbackOutputSchema_MyGPT = z.object({
   rating: z
     .number()
-    .describe("The AI's rating for the user's answer, from 1 to 10")
+    .describe("The AI's rating for the user's answer, from 1 to 10, give a 0 if the user doesn't answer and always give a number in the range.")
     .nullable(false),
   feedback: z
     .string()

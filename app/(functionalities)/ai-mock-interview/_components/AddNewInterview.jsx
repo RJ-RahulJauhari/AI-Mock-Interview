@@ -27,7 +27,12 @@ import { interviewQuestionsPromptSchema_MyGPT } from "@/utils/MyGPTSchema";
 
 // Utility function for creating the AI prompt
 const createPrompt = (jobPosition, jobDesc, jobExperience, filesData) => `
-  Using the details below, please frame 10 questions on the technologies, projects, and requirements of the job. Make it like an interview question, also include puzzles and concepts related to the technologies mentioned in the candidate's resume also give a sample high quality answer to the question generated:
+  Using the details below, please frame 10 questions on the technologies, projects, and requirements of the job. 
+  Make it like an interview question, also include puzzles, aptitude and coding questions and concepts related 
+  to the technologies mentioned in the candidate's resume also give a sample high quality answer to the question 
+  generated in markdown format also for coding questions takecare for the indents and the formating of the code so that
+  it can be placed in markdown format:
+  
   1. Job Position: ${jobPosition}
   2. Job Description: ${jobDesc}
   3. Years of Experience: ${jobExperience}

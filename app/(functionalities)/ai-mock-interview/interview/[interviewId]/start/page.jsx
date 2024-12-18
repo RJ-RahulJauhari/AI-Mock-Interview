@@ -85,6 +85,20 @@ const StartInterview = ({ params }) => {
     };
   }, [tabSwitchCount, tabSwitchHandled, isTabSwitching]);
 
+  const groupInterviewQuestions = (dataArray) => {
+    // Grouping questions by category
+    return dataArray.reduce((acc, question) => {
+      // If the category doesn't exist in the accumulator, create it
+      if (!acc[question?.category]) {
+        acc[question.category] = [];
+      }
+      // Push the question into the appropriate category
+      acc[question.category].push(question);
+      return acc; // Return the accumulator
+    }, {}); // Initial value is an empty object
+  };
+
+
   const getInterviewDetails = async () => {
     const result = await db
       .select()
@@ -93,8 +107,12 @@ const StartInterview = ({ params }) => {
     if (result) {
       console.log("Interview Data: ", result[0]);
       const pres = JSON.parse(result[0].jsonMockResp);
-      setInterviewData(pres);
+      console.log("Type of Parsed Data: ",typeof(pres));
       console.log("Parsed Interview Data: ", pres);
+      const groupedQuestions = groupInterviewQuestions(pres);
+      console.log("Type of Grouped Data: ",typeof(groupedQuestions));
+      const groupedQuestionsArray = Object.values(groupedQuestions).flat();
+      setInterviewData(groupedQuestionsArray);
     } else {
       console.log("Unable to fetch record of the interview..");
     }
