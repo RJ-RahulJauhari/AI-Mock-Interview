@@ -76,7 +76,7 @@ const RecordAnswerSection = ({ activeQuestionIndex, interviewData, interviewId, 
 
   const getFeedbackFromMyGPT = async () => {
     try {
-      const prompt = `Question: ${interviewData[activeQuestionIndex]?.questionText || "No question available"}, User Answer: ${userAnswer || "NO ANSWER"}. Sample Answer: ${interviewData[activeQuestionIndex]?.answerText} Depending on the question, give me a rating out of 10 and detailed feedback on how to improve the answer. Also be strict with the rating if the answer is not relvant to the question give a 0. Also consider how much the given answer matches with the sample answer and give rating accordingly. Don't consider the grammer and the spelling in the response, only consider the content.`;
+      const prompt = `Question: ${interviewData[activeQuestionIndex]?.questionText || "No question available"}, User Answer: ${userAnswer || "NO ANSWER"}. Sample Answer: ${interviewData[activeQuestionIndex]?.answerText} Depending on the question, give me a rating out of 10 the rating should be a number if the answer is not answered or very bad then give a 0 for the rating, also give detailed feedback on how to improve the answer. Also be strict with the rating if the answer is not relvant to the question give a 0. Also consider how much the given answer matches with the sample answer and give rating accordingly. Don't consider the grammer and the spelling in the response, only consider the content.`;
       console.log("Getting the response from MyGPT for question", activeQuestionIndex + 1);
 
       // Generate content from the feedback model
@@ -134,7 +134,7 @@ const RecordAnswerSection = ({ activeQuestionIndex, interviewData, interviewId, 
         correctAns: interviewData[activeQuestionIndex]?.answerText || "No correct answer provided",
         userAns: userAnswer === "" ? "NO ANSWER GIVEN" : userAnswer,
         feedback: feedback?.feedback || "No feedback available",
-        rating: feedback?.rating || "No rating provided",
+        rating: feedback?.rating || 0,
         userEmail: user?.user?.primaryEmailAddress?.emailAddress || "No email available",
         createdAt: moment().format("YYYY-MM-DD HH:mm:ss"), // Adjusted to a more universal format
       });

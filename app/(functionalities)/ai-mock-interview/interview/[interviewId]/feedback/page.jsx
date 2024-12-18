@@ -2,6 +2,7 @@
 import db from '@/utils/db'
 import { UserAnswerInterview } from '@/utils/schema'
 import { desc, eq } from 'drizzle-orm'
+import Markdown from 'react-markdown'
 import React, { useEffect, useState } from 'react'
 import {
     Accordion,
@@ -73,19 +74,19 @@ const FeedbackPage = ({ params }) => {
                                 {/* User Answer */}
                                 <div className="mb-4">
                                     <span className="font-semibold text-blue-600">Your Answer:</span>
-                                    <p className="text-blue-800 bg-blue-50 p-2 rounded-md">{data.userAns}</p>
+                                    <p className="text-blue-800 bg-blue-50 p-2 rounded-md"><Markdown>{data.userAns}</Markdown></p>
                                 </div>
 
                                 {/* Feedback */}
                                 <div className="mb-4">
                                     <span className="font-semibold text-green-600">Feedback:</span>
-                                    <p className="text-green-800 bg-green-50 p-2 rounded-md">{data.feedback}</p>
+                                    <p className="text-green-800 bg-green-50 p-2 rounded-md"><Markdown>{data.feedback}</Markdown></p>
                                 </div>
 
                                 {/* Favorable Answer */}
                                 <div className="mb-4">
                                     <span className="font-semibold text-purple-600">Sample Answer:</span>
-                                    <p className="text-purple-800 bg-purple-50 p-2 rounded-md">{data.correctAns}</p>
+                                    <p className="text-purple-800 bg-purple-50 p-2 rounded-md"><Markdown>{data.correctAns}</Markdown></p>
                                 </div>
 
                                 {/* Rating */}

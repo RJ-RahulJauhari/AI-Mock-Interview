@@ -28,7 +28,7 @@ export const interviewQuestionsPromptSchema_MyGPT = z.object({
 export const feedbackOutputSchema_MyGPT = z.object({
   rating: z
     .number()
-    .describe("The AI's rating for the user's answer, from 1 to 10, give a 0 if the user doesn't answer and always give a number in the range.")
+    .describe("The AI's rating for the user's answer, from 1 to 10.")
     .nullable(false),
   feedback: z
     .string()
